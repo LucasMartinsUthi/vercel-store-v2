@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    cert-manager.io/issue-temporary-certificate: 'true'
+    acme.cert-manager.io/http01-edit-in-place: 'true'
+    nalej.externaldns.ingress.class: nginx
+  labels:
+    apps.nalej.io/name: ${APP_NAME}
+  name: ${APP_NAME}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ${APP_NAME}.${DOMAIN_NAME}
+      http:
+        paths:
+          - backend:
+              service:
+                name: ${APP_NAME}
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - '${APP_NAME}.${DOMAIN_NAME}'
+      secretName: ${APP_NAME}-cert

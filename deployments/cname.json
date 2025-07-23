@@ -1,0 +1,13 @@
+{
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "$APP_NAME.$DOMAIN_NAME",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [{ "Value": "$TARGET_DOMAIN" }]
+      }
+    }
+  ]
+}
