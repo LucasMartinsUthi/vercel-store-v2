@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { GITLAB_API_BASE } from '@/utils/constants/endpoints'
 import { getSession, signOut } from 'next-auth/react'
-import { Session } from 'next-auth'
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || GITLAB_API_BASE,
@@ -14,10 +13,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     const session = await getSession()
-    const teste = session as Session
 
-    if (teste?.accessToken) {
-      config.headers.Authorization = `Bearer ${teste.accessToken}`
+    if (session?.accessToken) {
+      config.headers.Authorization = `Bearer ${session.accessToken}`
     }
 
     return config

@@ -8,20 +8,17 @@ import { useSignOut } from '@/hooks/useSignOut'
 import { H5, Body1 } from './Typography'
 import PSButton from './PSButton'
 import { Card } from './Card'
-import { Session } from 'next-auth'
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession()
-  const teste = session as Session
-
   const signOutClearCache = useSignOut()
 
   useEffect(() => {
-    if (teste?.error === 'RefreshAccessTokenError') {
+    if (session?.error === 'RefreshAccessTokenError') {
       signIn(undefined, { callbackUrl: '/' })
     }
 
-    if (teste?.error === 'RefreshAccessTokenExpired') {
+    if (session?.error === 'RefreshAccessTokenExpired') {
       signOutClearCache()
     }
   }, [session])

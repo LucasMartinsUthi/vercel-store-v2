@@ -8,12 +8,12 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import 'react-toastify/dist/ReactToastify.css'
 import { queryClient } from '@/config/queryClient'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import AuthErrorListener from '@/components/AuthErrorListener'
-import { Session } from 'next-auth'
 
 type ProvidersProps = {
   children: React.ReactNode
