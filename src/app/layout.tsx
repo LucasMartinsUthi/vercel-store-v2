@@ -5,9 +5,10 @@ import { Manrope } from 'next/font/google'
 import Sidebar from '@/components/Sidebar'
 import TopBar from '@/components/TopBar'
 import Providers from './providers'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import AuthGuard from '@/components/AuthGuard'
+import { Session } from 'next-auth'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const session = await getServerSession(authOptions)
+  const session: Session | null = await getServerSession(authOptions)
 
   return (
     <html lang="en">

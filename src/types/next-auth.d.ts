@@ -1,3 +1,5 @@
+import 'next-auth'
+
 declare module 'next-auth' {
   interface Session {
     accessToken: string
@@ -5,6 +7,8 @@ declare module 'next-auth' {
     refreshToken: string
     refreshTokenExpiresAt: number
     error: string
+
+    expires: string
   }
 
   interface Account {
